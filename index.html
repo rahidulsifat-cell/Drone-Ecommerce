@@ -207,34 +207,136 @@
             <h2 class="title-glow">Request Information</h2>
             <p>Enter your communication address to receive our full technical catalog and commercial pricing.</p>
             <div class="email-box">
-                <input type="email" placeholder="OPERATOR@EMAIL.COM" required>
-                <button type="button">SEND SIGNAL</button>
-            </div>
+    <input type="email" id="emailInput" placeholder="OPERATOR@EMAIL.COM" required>
+    <button onclick="sendEmail()">SEND SIGNAL</button>
+</div>
         </div>
     </section>
 
+
+<!-- PAYMENT MODAL -->
+<div id="paymentModal" class="modal">
+    <div class="modal-content fancy">
+
+        <span id="closeModal">&times;</span>
+
+        <div class="payment-header">
+    
+            <h2>Cash On Delivery</h2>
+            <p class="sub">Confirm order instantly</p>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="name" required>
+            <label>Full Name</label>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="phone" required>
+            <label>Phone Number</label>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="location" required>
+            <label>Location</label>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="trx" required>
+            <label>Extra Instruction</label>
+        </div>
+
+        <button id="orderBtn" class="order-btn">Confirm Order</button>
+
+        <p id="successMsg"></p>
+        <p style="font-size:12px; color:#aaa;">
+</p>
+
+    </div>
+</div>
     <footer>
         <div class="footer-grid">
             <div class="footer-brand">
                 <div class="logo">SkyDrone <span>BD</span></div>
                 <p>Engineering the future of aviation in Chittagong.</p>
             </div>
-            <div class="footer-links">
-                <h4>Grid</h4>
-                <a href="#">Fleet</a>
-                <a href="#">Repair Hub</a>
-                <a href="#">Licensing</a>
-            </div>
-            <div class="footer-links">
-                <h4>Network</h4>
-                <a href="#">Facebook</a>
-                <a href="#">Instagram</a>
-                <a href="#">LinkedIn</a>
-            </div>
+            <div>
+    <p>CEO: Rahidul Alam Sifat</p>
+    <p>Email: Rahidulalam@gmail.com</p>
+</div>
+            
         </div>
         <div class="footer-bottom">
             <p>&copy; 2025 SkyDrone BD. Chittagong HQ, Bangladesh.</p>
         </div>
     </footer>
+
+
+<script>
+const modal = document.getElementById("paymentModal");
+const closeModal = document.getElementById("closeModal");
+const orderBtn = document.getElementById("orderBtn");
+const successMsg = document.getElementById("successMsg");
+
+document.querySelectorAll(".buy-btn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+        modal.style.display = "flex";
+    });
+});
+
+closeModal.onclick = ()=> modal.style.display = "none";
+
+orderBtn.onclick = ()=>{
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+
+    if(name && phone){
+        successMsg.innerHTML = "🎉 Congratulations! Order Successful";
+        
+        sendToSheet(); // 👇 Google Sheet send
+    } else {
+        successMsg.innerHTML = "Fill all fields!";
+    }
+};
+</script>
+
+<script>
+function sendToSheet(){
+    fetch("https://script.google.com/macros/s/AKfycbxA-KfDushd2-fdgHxRSsnW7zBTqCvA8d0KRueONGAp80RuaBt5wGDpE-FIYZwWQDrA5w/exec", {
+        method:"POST",
+        body: JSON.stringify({
+            name: document.getElementById("name").value,
+            phone: document.getElementById("phone").value,
+            location: document.getElementById("location").value,
+            trx: document.getElementById("trx").value,
+            type: "Order"
+        })
+    });
+}
+</script>
+
+<script>
+function sendEmail(){
+    let email = document.getElementById("emailInput").value;
+
+    if(!email){
+        alert("Please Fillup!");
+        return;
+    }
+
+    fetch("https://script.google.com/macros/s/AKfycbxA-KfDushd2-fdgHxRSsnW7zBTqCvA8d0KRueONGAp80RuaBt5wGDpE-FIYZwWQDrA5w/exec", {
+        method:"POST",
+        body: JSON.stringify({
+            name: email,
+            phone: "",
+            location: "",
+            trx: "",
+            type: "Email Request"
+        })
+    });
+
+    alert("✅ Email Sent & Saved!");
+}
+</script>
 </body>
 </html>
