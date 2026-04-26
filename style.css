@@ -471,3 +471,206 @@ footer {
     .email-box button { padding: 15px; border-radius: 4px; }
     .banner-item { padding: 15px; }
 }
+
+.card {
+    transition: all 0.4s ease;
+}
+
+.product-grid .card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#pro:checked ~ .product-grid .p-mini,
+#mini:checked ~ .product-grid .p-pro {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.8);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.modal-content {
+    background:#111;
+    padding:30px;
+    width:300px;
+    text-align:center;
+    border:1px solid cyan;
+}
+
+.modal-content input {
+    width:100%;
+    margin:8px 0;
+    padding:10px;
+    background:black;
+    border:1px solid cyan;
+    color:white;
+}
+
+.bkash-logo {
+    width:120px;
+    margin-bottom:15px;
+}
+
+#successMsg {
+    color:lime;
+    margin-top:10px;
+}
+/* 🔥 Fancy Modal */
+.modal-content.fancy {
+    width: 350px;
+    background: linear-gradient(145deg, #0a0a0f, #111);
+    border-radius: 12px;
+    border: 1px solid rgba(0,255,255,0.3);
+    box-shadow: 0 0 40px rgba(0,255,255,0.2);
+    animation: popup 0.4s ease;
+}
+
+@keyframes popup {
+    from { transform: scale(0.7); opacity:0; }
+    to { transform: scale(1); opacity:1; }
+}
+
+/* Header */
+.payment-header {
+    text-align:center;
+    margin-bottom: 20px;
+}
+
+.payment-header h2 {
+    color: #ff4da6;
+    font-family: var(--orbitron);
+}
+
+.sub {
+    font-size: 0.7rem;
+    color: #aaa;
+}
+
+/* Floating input */
+.input-group {
+    position: relative;
+    margin: 15px 0;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid #333;
+    color: white;
+    outline: none;
+}
+
+.input-group label {
+    position: absolute;
+    left: 10px;
+    top: 12px;
+    color: #777;
+    font-size: 0.75rem;
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label {
+    top: -8px;
+    left: 8px;
+    background: #0a0a0f;
+    padding: 0 5px;
+    color: #00f2ff;
+}
+
+/* Button */
+.order-btn {
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    background: linear-gradient(45deg, #ff4da6, #00f2ff);
+    border:none;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.order-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Success animation */
+#successMsg {
+    margin-top:15px;
+    font-weight:bold;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+/* Close button */
+#closeModal {
+    position:absolute;
+    right:15px;
+    top:10px;
+    cursor:pointer;
+    font-size:20px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+/* 🔥 ULTRA MODAL */
+.modal {
+    backdrop-filter: blur(10px);
+}
+
+.modal-content.fancy {
+    width: 370px;
+    background: rgba(10,10,15,0.9);
+    border-radius: 15px;
+    border: 1px solid rgba(0,255,255,0.3);
+    box-shadow: 0 0 60px rgba(0,255,255,0.25);
+    animation: popup 0.4s ease;
+    position: relative;
+}
+
+/* Glow border animation */
+.modal-content.fancy::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 15px;
+    background: linear-gradient(45deg, #00f2ff, #ff4da6, #00f2ff);
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0.5;
+}
+
+/* Button glow */
+.order-btn {
+    background: linear-gradient(45deg, #ff4da6, #00f2ff);
+    box-shadow: 0 0 20px rgba(0,255,255,0.5);
+}
+
+/* Hover effect */
+.order-btn:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 30px rgba(255,77,166,0.6);
+}
+
+.payment-header h2 {
+    margin-top: 10px;
+    font-size: 18px;
+    text-align: center;
+}
